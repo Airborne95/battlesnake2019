@@ -27,27 +27,25 @@ function removeFromArray(arr, el) {
     }
   }
 }
-
-
-
-function initalize(rows, cols, grid) {
-  // making a 2d array
-  let i = 0;
-  let j = 0;
+// making a 2d array
+function create2DArray(rows,cols,grid){
+	let i = 0, j = 0;
   for (i = 0; i < cols; i++) {
     grid[i] = new Array(rows);
   }
-  for (i = 0; i < cols; i++) {
-    for (j = 0; j < rows; j++) {
+}
+function initalize(rows, cols, grid) {
+
+  create2DArray(rows,cols,grid)
+
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       grid[i][j] = new spot(i, j);
     }
   }
 
-  j = 0;
-  i = 0;
-
-  for (i = 0; i < cols; i++) {
-    for (j = 0; j < rows; j++) {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       grid[i][j].addNeighbors(grid, cols, rows);
     }
   }
@@ -153,7 +151,7 @@ app.post('/move', (request, response) => {
   let food = bestFood(request.body.you.body[0], request.body.board.food)
   end = grid[food.x][food.y]
 
-
+	//Start of A *
   openSet.push(start);
   while (openSet.length > 0) {
     var lowestIndex = 0;
